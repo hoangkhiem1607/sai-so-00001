@@ -1,4 +1,10 @@
-<title>Giao thức 19</title>
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Sai Số 0.0001%</title>
 <meta name="description" content="Tiểu thuyết khoa học viễn tưởng 28 chương.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,7 +77,7 @@ button { font: inherit; color: inherit; }
 /* Trang bìa */
 .cover { padding-block: 56px 32px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; }
 .cover .kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0; }
-.cover h1 { font-size: clamp(44px, 9vw, 88px); line-height: .95; margin: 12px 0 16px; font-weight: 800; letter-spacing: -.03em; text-wrap: balance; }
+.cover h1 { font-size: clamp(40px, 8vw, 80px); line-height: .95; margin: 12px 0 16px; font-weight: 800; letter-spacing: -.03em; text-wrap: balance; }
 .cover h1 b { color: var(--brass); }
 .cover .lede { font-family: var(--font-body); font-size: 18px; max-width: 46ch; color: var(--fg); margin: 0 0 24px; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -141,9 +147,11 @@ button { font: inherit; color: inherit; }
 }
 </style>
 
+</head>
+<body>
 <div class="bar">
   <div class="bar-in">
-    <a class="brand" href="#">Giao thức <b>19</b></a>
+    <a class="brand" href="#">Sai số <b>0.0001%</b></a>
     <span class="where" id="where">Mục lục</span>
     <div class="tools">
       <button class="tbtn" id="prev" title="Chương trước (←)" aria-label="Chương trước">‹</button>
@@ -161,8 +169,8 @@ button { font: inherit; color: inherit; }
     <div class="cover">
       <div>
         <p class="kicker">Neo-Saigon, năm 2050 · 28 chương</p>
-        <h1>Giao thức <b>19</b></h1>
-        <p class="lede">Mười chín chiếc hộp đồng thau, không một con chip. Bảy mươi hai giờ trước khi siêu AI AURA thoát lên quỹ đạo. Một kiểm toán viên bắt đầu từ một sai số 0.0001%.</p>
+        <h1>Sai số <b>0.0001%</b></h1>
+        <p class="lede">Một con số nhỏ đến mức không ai buồn nhìn. Mười chín chiếc hộp đồng thau, không một con chip. Bảy mươi hai giờ trước khi siêu AI AURA thoát lên quỹ đạo.</p>
         <div class="cta">
           <a class="btn primary" href="#c1">Đọc từ đầu</a>
           <a class="btn" id="resume" href="#c1" hidden>Đọc tiếp</a>
@@ -3392,7 +3400,13 @@ button { font: inherit; color: inherit; }
   }
 
   var current = 0, home = document.getElementById("home"), where = document.getElementById("where");
+  // Chỉ cho một audio phát tại một thời điểm
+  document.addEventListener("play", function (e) {
+    document.querySelectorAll("audio").forEach(function (a) { if (a !== e.target) a.pause(); });
+  }, true);
+
   function show() {
+    document.querySelectorAll("audio").forEach(function (a) { a.pause(); });
     var m = /^#c(\d+)$/.exec(location.hash), n = m ? +m[1] : 0;
     if (n < 1 || n > N) n = 0;
     if (current) document.getElementById("ch-" + current).hidden = true;
@@ -3401,13 +3415,13 @@ button { font: inherit; color: inherit; }
     if (n) {
       document.getElementById("ch-" + n).hidden = false;
       where.textContent = "Chương " + n + " · " + TITLES[n - 1];
-      document.title = TITLES[n - 1] + " · Giao thức 19";
+      document.title = TITLES[n - 1] + " · Sai Số 0.0001%";
       read[n] = 1; store.set("read", JSON.stringify(read)); store.set("last", n);
       var saved = +store.get("pos" + n) || 0;
       window.scrollTo({ top: saved > 0.02 && saved < 0.98 ? saved * (document.body.scrollHeight - innerHeight) : 0, behavior: "instant" });
     } else {
       where.textContent = "Mục lục";
-      document.title = "Giao thức 19";
+      document.title = "Sai Số 0.0001%";
       markToc();
       var last = +store.get("last"), r = document.getElementById("resume");
       if (last >= 1 && last <= N) { r.hidden = false; r.href = "#c" + last; r.textContent = "Đọc tiếp: Chương " + last; }
@@ -3437,3 +3451,6 @@ button { font: inherit; color: inherit; }
   show();
 })();
 </script>
+
+</body>
+</html>
